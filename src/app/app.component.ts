@@ -23,25 +23,36 @@ export class AppComponent implements  OnInit{
   ) {  }
 
   ngOnInit():void {
-    this.myForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+
+    this.myForm = this.creaFormulario();
 
   }
 
+  private creaFormulario(): FormGroup{
+    return this.formBuilder.group({
+      email: [''],
+      password: ['']
+    })
+  }
+
+
   // convenience getter for easy access to form fields
-  get f() { return this.myForm.controls; }
+  public get f() {
+    return this.myForm.controls;
+  }
 
-  onSubmit(){
+  public onSubmit(){
+    alert("Se envia el formulario");
     this.submitted = true;
-
+    console.log(this.myForm);
     // reset alerts on submit
     //this.alertService.clear();
 
     // stop here if form is invalid
     if (this.myForm.invalid) {
       return;
+    }else{
+      alert("Se guardara la información");
     }
 
     this.loading = true;
