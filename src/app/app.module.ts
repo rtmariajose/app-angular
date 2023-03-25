@@ -7,11 +7,19 @@ import { LogincheckComponent } from './logincheck/logincheck.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
+declare var $: any;
+import 'jquery';
+import 'datatables.net';
+import 'datatables.net-dt';
+
+
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogincheckComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
