@@ -29,7 +29,7 @@ import { TablaUsuarioLogComponent } from './tabla-usuario-log/tabla-usuario-log.
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

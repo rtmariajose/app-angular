@@ -33,6 +33,9 @@ connection.connect((err) =>{
  */
 app.get('/usuario_login',(req,res) =>{
   //se debe consultar por el email y pass
+
+  let status;
+  let mensaje = "";
   const email = req.query.email;
   const pass = req.query.password;
   console.log("Datos"+email+ " -- "+pass);
@@ -40,16 +43,40 @@ app.get('/usuario_login',(req,res) =>{
   connection.query(sql,[email,pass],(err,result) =>{
     if(err) throw  err;
     console.log(result);
-    let id_usuario = result[0].id;
+    let id_usuario = null;
+    if(result.length > 0)
+      id_usuario = result[0].id;
 
-  const datos = {
-      usuario_login_id: id_usuario
-    };
-    connection.query('INSERT INTO usuario_log SET ?', datos, function (error, results, fields) {
-      if (error) throw error;
-        console.log('Registro insertado con éxito');
-      res.send(results);
-    });
+    if(id_usuario != null && id_usuario != ""){
+      const datos = {
+        usuario_login_id: id_usuario
+      };
+      connection.query('INSERT INTO usuario_log SET ?', datos,
+        function (error, results, fields) {
+        if (error) throw error;
+        console.log(results.affectedRows+'Registro insertado con éxito' + JSON.stringify(results));
+        status =  (results.affectedRows >= 1 ) ? true : false;
+        mensaje = (results.affectedRows >= 1 ) ? "Se registro el proceso correctamente" :
+          "Hubo un error al insertar el log de usuario";
+          let response = {
+            "status": status,
+            "mensaje": mensaje
+          };
+          res.send(response);
+      });
+    }else{
+        status =  false;
+        mensaje =  "No existe el usuario";
+      let response = {
+        "status": status,
+        "mensaje": mensaje
+      };
+      res.send(response);
+
+    }
+
+
+
 
   });
 });
