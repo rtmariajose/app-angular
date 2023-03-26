@@ -37,10 +37,24 @@ connection.query(sql,(err,result) =>{
 });
 
 app.get('/saldos',(req,res) =>{
-  const sql = "select * from saldos";
-  connection.query(sql,(err,result) =>{
+  // Paginación
+  const start = Number(req.query.start);
+  const length = Number(req.query.length);
+  const order = req.query.order[0];
+  const column = order.column;
+  const dir = order.dir;
+  const sql = 'select * from saldos LIMIT ?,?';
+  connection.query(sql,[start,length],(err,result) =>{
     if(err) throw  err;
-    res.send(result);
+    total_registros = result.length;
+    // Devolver los datos al DataTable
+    const response = {
+      "draw": req.query.draw,
+      "recordsTotal": total_registros,
+      "recordsFiltered": total_registros,
+      "data": result
+    };
+    res.send(response);
   });
 });
 
