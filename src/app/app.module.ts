@@ -14,12 +14,16 @@ import 'datatables.net-dt';
 
 
 import { TableComponent } from './table/table.component';
+import { TablaUsuarioLogComponent } from './tabla-usuario-log/tabla-usuario-log.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogincheckComponent,
     TableComponent,
+    TablaUsuarioLogComponent,
+    InicioComponent,
   ],
   imports: [
     BrowserModule,

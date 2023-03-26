@@ -28,12 +28,29 @@ connection.connect((err) =>{
   if(err) throw err;
   console.log("conectado a la base de datos MYSQL");
 });
+/**
+ * Servicio que permite realizar la validacion del usuario mas el logg del usuario
+ */
 app.get('/usuario_login',(req,res) =>{
-  const sql = "select * from usuario_login";
-connection.query(sql,(err,result) =>{
-  if(err) throw  err;
-  res.send(result);
-});
+  //se debe consultar por el email y pass
+  const email = req.query.usuario;
+  const pass = req.query.password;
+  const sql = 'select id from usuario_login  where email = ? and password= ?';
+  connection.query(sql,[email,pass],(err,result) =>{
+    if(err) throw  err;
+   // res.send(result);
+    let id_usuario = result.id;
+
+    console.log("Id de usuario "+id_usuario);
+ /*   const datos = {
+      usuario_login_id: id_usuario
+    };
+    connection.query('INSERT INTO usuario_log SET ?', datos, function (error, results, fields) {
+      if (error) throw error;
+        console.log('Registro insertado con éxito');
+    });*/
+
+  });
 });
 
 app.get('/saldos',(req,res) =>{
@@ -45,6 +62,31 @@ app.get('/saldos',(req,res) =>{
   const dir = order.dir;
   const sql = 'select * from saldos LIMIT ?,?';
   connection.query(sql,[start,length],(err,result) =>{
+    if(err) throw  err;
+    total_registros = result.length;
+    // Devolver los datos al DataTable
+    const response = {
+      "draw": req.query.draw,
+      "recordsTotal": total_registros,
+      "recordsFiltered": total_registros,
+      "data": result
+    };
+    res.send(response);
+  });
+});
+/**
+ * Permite conocer los log del usuario que se logea en una tabla
+ */
+app.get('/log_usuario',(req,res) =>{
+  // Paginación
+  const start = Number(req.query.start);
+  const length = Number(req.query.length);
+  const order = req.query.order[0];
+  const column = order.column;
+  const dir = order.dir;
+  const email = req.query.usuario;
+  const sql = 'select * from usuario_log  where email = ? LIMIT ?,?';
+  connection.query(sql,[email,start,length],(err,result) =>{
     if(err) throw  err;
     total_registros = result.length;
     // Devolver los datos al DataTable
