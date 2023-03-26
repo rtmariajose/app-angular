@@ -86,7 +86,9 @@ app.get('/log_usuario',(req,res) =>{
   const column = order.column;
   const dir = order.dir;
   const email = req.query.usuario;
-  const sql = 'select * from usuario_log  where email = ? LIMIT ?,?';
+  const sql = 'select us.email,LOG.fecha_registro from usuario_log LOG\n' +
+    'INNER JOIN usuario_login us ON LOG.usuario_login_id = us.id\n' +
+    '  where us.email = ? LIMIT ?,?';
   connection.query(sql,[email,start,length],(err,result) =>{
     if(err) throw  err;
     total_registros = result.length;

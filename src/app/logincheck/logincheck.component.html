@@ -1,43 +1,32 @@
-<p>logincheck works!</p>
+<div class="content" style="width: 100%">
+  <div class="container">
+    <div class="card" >
 
-<h1>{{saludo}}</h1>
-<div class="container">
 
-  <div class="card" >
-    <div class="card-block">
-      <h4 class="card-title">Login</h4>
-      <div >
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()" style="margin-top: 4%">
+        <h3 class="h3 mb-3 fw-normal">Login</h3>
+        <img  src="https://cdn6.aptoide.com/imgs/7/8/2/782b7f7b7c6c106cf6ae151fe0bce971_icon.png" alt="" width="72" height="72" style="margin-bottom: 5%">
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="email" id="form2Example1" class="form-control" />
-          <label class="form-label" for="form2Example1">Email address</label>
+          <input type="email"  formControlName="email"  id="email" name="email" class="form-control" />
+          <label class="form-label" for="email">Email</label>
         </div>
-
         <!-- Password input -->
         <div class="form-outline mb-4">
-          <input type="password" id="form2Example2" class="form-control" />
-          <label class="form-label" for="form2Example2">Password</label>
+          <input type="password"  formControlName="password" class="form-control"  />
+          <label class="form-label" for="password">Contraseña</label>
         </div>
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+          Ingresar
+        </button>
+      </form>
+    </div>
+    <br>
+    <div>
 
-        <!-- 2 column grid layout for inline styling -->
-        <div class="row mb-4">
-          <div class="col d-flex justify-content-center">
-            <!-- Checkbox -->
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-              <label class="form-check-label" for="form2Example31"> Remember me </label>
-            </div>
-          </div>
-
-          <div class="col">
-            <!-- Simple link -->
-            <a href="#!">Forgot password?</a>
-          </div>
-        </div>
-
-        <!-- Submit button -->
-        <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
-      </div>
     </div>
   </div>
+
+
 </div>

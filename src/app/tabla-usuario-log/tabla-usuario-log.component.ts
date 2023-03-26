@@ -9,7 +9,7 @@ import 'datatables.net-bs4';
   templateUrl: './tabla-usuario-log.component.html',
   styleUrls: ['./tabla-usuario-log.component.css']
 })
-export class TablaUsuarioLogComponent implements OnInit{
+export class TablaUsuarioLogComponent {
   dataTable: any;
   currentPage: number = 1;
   pageSize: number = 10;

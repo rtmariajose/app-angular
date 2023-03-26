@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogincheckComponent } from './logincheck/logincheck.component';
@@ -13,9 +12,9 @@ import 'datatables.net';
 import 'datatables.net-dt';
 
 
+import { InicioComponent } from './inicio/inicio.component';
 import { TableComponent } from './table/table.component';
 import { TablaUsuarioLogComponent } from './tabla-usuario-log/tabla-usuario-log.component';
-import { InicioComponent } from './inicio/inicio.component';
 
 @NgModule({
   declarations: [

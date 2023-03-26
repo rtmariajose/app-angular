@@ -11,7 +11,7 @@ import 'datatables.net-bs4';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit{
+export class TableComponent{
   dataTable: any;
   currentPage: number = 1;
   pageSize: number = 10;
@@ -57,11 +57,11 @@ export class TableComponent implements OnInit{
   }
 
   recargarTabla(): void {
-    this.dataTable.ajax.reload();
+   // this.dataTable.ajax.reload();
   }
 
   pageChanged(event: any): void {
-    this.currentPage = event.page;
-    this.obtenerSaldos();
+    //this.currentPage = event.page;
+    //this.obtenerSaldos();
   }
 }
