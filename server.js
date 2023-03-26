@@ -33,22 +33,23 @@ connection.connect((err) =>{
  */
 app.get('/usuario_login',(req,res) =>{
   //se debe consultar por el email y pass
-  const email = req.query.usuario;
+  const email = req.query.email;
   const pass = req.query.password;
+  console.log("Datos"+email+ " -- "+pass);
   const sql = 'select id from usuario_login  where email = ? and password= ?';
   connection.query(sql,[email,pass],(err,result) =>{
     if(err) throw  err;
-   // res.send(result);
-    let id_usuario = result.id;
+    console.log(result);
+    let id_usuario = result[0].id;
 
-    console.log("Id de usuario "+id_usuario);
- /*   const datos = {
+  const datos = {
       usuario_login_id: id_usuario
     };
     connection.query('INSERT INTO usuario_log SET ?', datos, function (error, results, fields) {
       if (error) throw error;
         console.log('Registro insertado con éxito');
-    });*/
+      res.send(results);
+    });
 
   });
 });

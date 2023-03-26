@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +18,12 @@ export class AppComponent implements  OnInit{
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private http:HttpClient
   //  private accountService: AccountService,
   //  private alertService: AlertService
   ) {  }
+
+
 
   ngOnInit():void {
 
@@ -43,18 +47,24 @@ export class AppComponent implements  OnInit{
   public onSubmit(){
     alert("Se envia el formulario");
     this.submitted = true;
-    console.log(this.myForm);
-    // reset alerts on submit
-    //this.alertService.clear();
-
-    // stop here if form is invalid
+    this.loading = true;
     if (this.myForm.invalid) {
       return;
     }else{
-      alert("Se guardara la información");
+      const params = new HttpParams()
+        .set('email', this.myForm.value.email)
+        .set('password',this.myForm.value.password)
+
+      this.http.get('http://localhost:3000/usuario_login', { params })
+        .subscribe((response: any) => {
+          console.log("hay que redirigir");
+          this.loading = false;
+         this.router.navigate(['/inicio']);
+        });
+
     }
 
-    this.loading = true;
+    //this.loading = true;
    /* this.accountService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe({
