@@ -12,12 +12,13 @@ export class InicioComponent{
 
   ngOnInit():void {
     this.email_usuario = this.route.snapshot.queryParams['email'];
-    console.log("email"+JSON.stringify(this.route.snapshot.queryParams));
   }
 
   verRegistrosLogUsuario(){
     const email = this.email_usuario;
-    this.router.navigateByUrl('/table-usuario-log?email='+email);
+    if(email != "" && email != null && email !=undefined) {
+      this.router.navigateByUrl('/table-usuario-log?email=' + email);
+    }
   }
 
   verRegistrosSaldos(){

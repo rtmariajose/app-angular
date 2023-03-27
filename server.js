@@ -88,19 +88,28 @@ app.get('/saldos',(req,res) =>{
   const order = req.query.order[0];
   const column = order.column;
   const dir = order.dir;
-  const sql = 'select * from saldos LIMIT ?,?';
-  connection.query(sql,[start,length],(err,result) =>{
-    if(err) throw  err;
-    total_registros = result.length;
-    // Devolver los datos al DataTable
-    const response = {
-      "draw": req.query.draw,
-      "recordsTotal": total_registros,
-      "recordsFiltered": total_registros,
-      "data": result
-    };
-    res.send(response);
+
+  const sql_total = 'select * from saldos';
+  connection.query(sql_total,(err,result2) =>{
+    total_max_registros = result2.length;
+    console.log("cantida"+total_max_registros);
+    const sql = 'select * from saldos LIMIT ?,?';
+    connection.query(sql,[start,length],(err,result) =>{
+      if(err) throw  err;
+      total_registros = result.length;
+      console.log("Total"+total_registros);
+      // Devolver los datos al DataTable
+      const response = {
+        "draw": req.query.draw,
+        "recordsTotal": total_max_registros,
+        "recordsFiltered": total_registros,
+        "data": result
+      };
+      res.send(response);
+    });
+
   });
+
 });
 /**
  * Permite conocer los log del usuario que se logea en una tabla

@@ -28,7 +28,12 @@ export class TablaUsuarioLogComponent {
   obtenerLogUsuario(){
     //this.email = 'rt.mariajose@gmail.com';
     this.dataTable = $('#tabla_log_usuarios').DataTable({
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+      },
       pageLength: 10,
+      searching: false,
+      lengthChange:false,
       serverSide: true,
       processing: true,
       order: [[ 1, 'desc' ]],

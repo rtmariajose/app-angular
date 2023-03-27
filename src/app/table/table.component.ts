@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
-
-//declare var $: any;
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
@@ -25,10 +23,15 @@ export class TableComponent{
 
   obtenerSaldos(){
     this.dataTable = $('#tabla_saldos').DataTable({
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+      },
       pageLength: 10,
+      searching: false,
+      lengthChange:false,
       serverSide: true,
       processing: true,
-      order: [[ 1, 'desc' ]],
+      order: [[ 3, 'desc' ]],
       ajax:(dataTablesParameters: any, callback:any) =>{
         const params = new HttpParams()
           .set('start', dataTablesParameters.start)
@@ -57,11 +60,11 @@ export class TableComponent{
   }
 
   recargarTabla(): void {
-   // this.dataTable.ajax.reload();
+    this.dataTable.ajax.reload();
   }
 
   pageChanged(event: any): void {
-    //this.currentPage = event.page;
-    //this.obtenerSaldos();
+    this.currentPage = event.page;
+    this.obtenerSaldos();
   }
 }
