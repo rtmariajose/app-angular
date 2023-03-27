@@ -9,7 +9,7 @@
       <div class="card-body">
         <h5 class="card-title">Registros de Log de mi Usuario</h5>
         <p class="card-text">Permite ver el registro de log que ha tenido mi usuario en el sistema.</p>
-        <a href="#" class="btn btn-primary" (click)="verRegistrosLogUsuario()">Ver Registros</a>
+        <a href="#" class="btn btn-primary" [routerLink]="['/tabla-usuario-log/']" [queryParams]="{email: email_usuario}">Ver Registros</a>
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@
       <div class="card-body">
         <h5 class="card-title">Registros de Saldos</h5>
         <p class="card-text">Permite ver el hist&oacute;rico de saldos.</p>
-        <a href="#" class="btn btn-primary" (click)="verRegistrosSaldos()">Ver registros</a>
+        <a href="#" class="btn btn-primary" [routerLink]="['/table']" >Ver registros</a>
       </div>
     </div>
   </div>

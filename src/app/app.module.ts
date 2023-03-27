@@ -15,6 +15,7 @@ import 'datatables.net-dt';
 import { InicioComponent } from './inicio/inicio.component';
 import { TableComponent } from './table/table.component';
 import { TablaUsuarioLogComponent } from './tabla-usuario-log/tabla-usuario-log.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TablaUsuarioLogComponent } from './tabla-usuario-log/tabla-usuario-log.
     TableComponent,
     TablaUsuarioLogComponent,
     InicioComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

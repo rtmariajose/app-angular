@@ -117,21 +117,30 @@ app.get('/log_usuario',(req,res) =>{
   const column = order.column;
   const dir = order.dir;
   const email = req.query.usuario;
-  const sql = 'select us.email,DATE_FORMAT(LOG.fecha_registro, \'%Y-%m-%d %T\') as fecha_registro from usuario_log LOG\n' +
+
+  const sql2 = 'select us.email,DATE_FORMAT(LOG.fecha_registro, \'%Y-%m-%d %T\') as fecha_registro from usuario_log LOG\n' +
     'INNER JOIN usuario_login us ON LOG.usuario_login_id = us.id\n' +
-    '  where us.email = ? LIMIT ?,?';
-  connection.query(sql,[email,start,length],(err,result) =>{
-    if(err) throw  err;
-    total_registros = result.length;
-    // Devolver los datos al DataTable
-    const response = {
-      "draw": req.query.draw,
-      "recordsTotal": total_registros,
-      "recordsFiltered": total_registros,
-      "data": result
-    };
-    res.send(response);
+    '  where us.email = ?';
+
+  connection.query(sql2,[email],(err,result2) => {
+    total_max_registros = result2.length;
+    const sql = 'select us.email,DATE_FORMAT(LOG.fecha_registro, \'%Y-%m-%d %T\') as fecha_registro from usuario_log LOG\n' +
+      'INNER JOIN usuario_login us ON LOG.usuario_login_id = us.id\n' +
+      '  where us.email = ? LIMIT ?,?';
+    connection.query(sql,[email,start,length],(err,result) =>{
+      if(err) throw  err;
+      total_registros = result.length;
+      // Devolver los datos al DataTable
+      const response = {
+        "draw": req.query.draw,
+        "recordsTotal": total_max_registros,
+        "recordsFiltered": total_registros,
+        "data": result
+      };
+      res.send(response);
+    });
   });
+
 });
 
 app.listen(port,()=>{

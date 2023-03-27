@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
-export class InicioComponent{
+export class InicioComponent implements OnInit{
   email_usuario = "";
   constructor(private router: Router,private route: ActivatedRoute) { }
 
@@ -28,7 +28,7 @@ export class InicioComponent{
   }
 
   verRegistrosSaldos(){
-    this.router.navigateByUrl('/table') .then(() => {
+    this.router.navigate(['/table']).then(() => {
       console.log('Navegación completada');
       // Agregar aquí cualquier otra acción que necesites realizar después de la navegación.
     })
