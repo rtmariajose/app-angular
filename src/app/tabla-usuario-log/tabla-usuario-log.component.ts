@@ -46,7 +46,7 @@ export class TablaUsuarioLogComponent {
           .set('order[0][dir]', dataTablesParameters.order[0].dir)
           .set('usuario',this.email);
 
-        this.http.get('http://localhost:3000/log_usuario', { params })
+        this.http.get('http://34.176.228.134/log_usuario', { params })
           .subscribe((response: any) => {
 
             callback({

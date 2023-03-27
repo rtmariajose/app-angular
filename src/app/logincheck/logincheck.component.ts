@@ -51,7 +51,7 @@ export class LogincheckComponent implements OnInit{
         .set('password',this.myForm.value.password)
 
 
-      this.http.get('http://localhost:3000/usuario_login', { params })
+      this.http.get('http://34.176.228.134/usuario_login', { params })
         .subscribe((response: any) => {
           this.loading = false;
           const email_u = this.myForm.value.email;

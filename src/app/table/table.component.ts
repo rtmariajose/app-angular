@@ -40,7 +40,7 @@ export class TableComponent{
           .set('order[0][column]', dataTablesParameters.order[0].column)
           .set('order[0][dir]', dataTablesParameters.order[0].dir);
 
-        this.http.get('http://localhost:3000/saldos', { params })
+        this.http.get('http://34.176.228.134/saldos', { params })
           .subscribe((response: any) => {
 
             callback({
