@@ -17,11 +17,23 @@ export class InicioComponent{
   verRegistrosLogUsuario(){
     const email = this.email_usuario;
     if(email != "" && email != null && email !=undefined) {
-      this.router.navigateByUrl('/table-usuario-log?email=' + email);
+      this.router.navigateByUrl('/tabla-usuario-log?email=' + email).then(() => {
+        console.log('Navegación completada');
+        // Agregar aquí cualquier otra acción que necesites realizar después de la navegación.
+      })
+        .catch(error => {
+          console.error('Error al navegar', error);
+        });
     }
   }
 
   verRegistrosSaldos(){
-    this.router.navigateByUrl('/table');
+    this.router.navigateByUrl('/table') .then(() => {
+      console.log('Navegación completada');
+      // Agregar aquí cualquier otra acción que necesites realizar después de la navegación.
+    })
+      .catch(error => {
+        console.error('Error al navegar', error);
+      });
   }
 }

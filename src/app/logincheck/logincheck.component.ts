@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient, HttpParams} from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,12 +24,8 @@ export class LogincheckComponent implements OnInit{
 
   ) {  }
 
-
-
   ngOnInit():void {
-
     this.myForm = this.creaFormulario();
-
   }
 
   private creaFormulario(): FormGroup{
@@ -40,8 +35,6 @@ export class LogincheckComponent implements OnInit{
     })
   }
 
-
-  // convenience getter for easy access to form fields
   public get f() {
     return this.myForm.controls;
   }

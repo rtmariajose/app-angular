@@ -38,11 +38,9 @@ app.get('/usuario_login',(req,res) =>{
   let mensaje = "";
   const email = req.query.email;
   const pass = req.query.password;
-  console.log("Datos"+email+ " -- "+pass);
   const sql = 'select id from usuario_login  where email = ? and password= ?';
   connection.query(sql,[email,pass],(err,result) =>{
     if(err) throw  err;
-    console.log(result);
     let id_usuario = null;
     if(result.length > 0)
       id_usuario = result[0].id;
@@ -54,7 +52,6 @@ app.get('/usuario_login',(req,res) =>{
       connection.query('INSERT INTO usuario_log SET ?', datos,
         function (error, results, fields) {
         if (error) throw error;
-        console.log(results.affectedRows+'Registro insertado con éxito' + JSON.stringify(results));
         status =  (results.affectedRows >= 1 ) ? true : false;
         mensaje = (results.affectedRows >= 1 ) ? "Se registro el proceso correctamente" :
           "Hubo un error al insertar el log de usuario";
@@ -92,12 +89,10 @@ app.get('/saldos',(req,res) =>{
   const sql_total = 'select * from saldos';
   connection.query(sql_total,(err,result2) =>{
     total_max_registros = result2.length;
-    console.log("cantida"+total_max_registros);
     const sql = 'select * from saldos LIMIT ?,?';
     connection.query(sql,[start,length],(err,result) =>{
       if(err) throw  err;
       total_registros = result.length;
-      console.log("Total"+total_registros);
       // Devolver los datos al DataTable
       const response = {
         "draw": req.query.draw,

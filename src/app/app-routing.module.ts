@@ -9,13 +9,11 @@ const routes: Routes = [
   { path: "", component: LogincheckComponent},
   { path: "inicio", component: InicioComponent },
   { path: "table", component: TableComponent },
-  { path: "table-usuario-log", component: TablaUsuarioLogComponent },
+  { path: "tabla-usuario-log", component: TablaUsuarioLogComponent },
 ];
-const routesOptions: ExtraOptions = {
-  initialNavigation: undefined
-};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes, routesOptions)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
