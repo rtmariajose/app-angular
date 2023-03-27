@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-
+import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
@@ -15,14 +15,18 @@ export class TablaUsuarioLogComponent {
   pageSize: number = 10;
   totalItems: number = 0;
   email:any;
-  constructor(private http:HttpClient) { }
+
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+
+  }
 
   ngOnInit():void {
+    this.email = this.route.snapshot.queryParams['email'];
     this.obtenerLogUsuario();
   }
 
   obtenerLogUsuario(){
-    this.email = 'rt.mariajose@gmail.com';
+    //this.email = 'rt.mariajose@gmail.com';
     this.dataTable = $('#tabla_log_usuarios').DataTable({
       pageLength: 10,
       serverSide: true,
@@ -49,7 +53,7 @@ export class TablaUsuarioLogComponent {
       },
       columns: [
         { data: 'email' },
-        { data: 'fecha' },
+        { data: 'fecha_registro' },
       ]
     });
   }

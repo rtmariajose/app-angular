@@ -15,7 +15,7 @@ export class LogincheckComponent implements OnInit{
   loading = false;
   submitted = false;
   sio = true;
-  correo_fijo = 'demo@check.cl';
+  correo_fijo = 'demo@chek.cl';
   pass_fijo = 'abcd';
   constructor(
     private formBuilder: FormBuilder,
@@ -61,9 +61,13 @@ export class LogincheckComponent implements OnInit{
       this.http.get('http://localhost:3000/usuario_login', { params })
         .subscribe((response: any) => {
           this.loading = false;
+          const email_u = this.myForm.value.email;
           if(response.status){
+            $("#hd-correo").val(this.myForm.value.email);
             Swal.fire('Correcto','Bievenido usuario '+this.myForm.value.email, 'success');
-            this.router.navigateByUrl('/inicio');
+            this.router.navigateByUrl('/inicio?email='+email_u);
+
+
           }else {
             Swal.fire('Error', response.mensaje, 'error');
           }

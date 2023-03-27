@@ -7,16 +7,17 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent{
-
-  constructor(private router: Router) { }
+  email_usuario = "";
+  constructor(private router: Router,private route: ActivatedRoute) { }
 
   ngOnInit():void {
-
-    console.log("LLegue al inicio");
+    this.email_usuario = this.route.snapshot.queryParams['email'];
+    console.log("email"+JSON.stringify(this.route.snapshot.queryParams));
   }
 
   verRegistrosLogUsuario(){
-    this.router.navigateByUrl('/table-usuario-log');
+    const email = this.email_usuario;
+    this.router.navigateByUrl('/table-usuario-log?email='+email);
   }
 
   verRegistrosSaldos(){
