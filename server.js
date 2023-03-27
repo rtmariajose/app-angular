@@ -5,7 +5,8 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-const allowedOrigins = ['http://localhost:4200', 'http://localhost:3000'];
+const allowedOrigins = ['http://localhost:4200', 'http://localhost:3000',
+  'http://34.176.228.134:4200','http://34.176.228.134:3000'];
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
