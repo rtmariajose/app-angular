@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {LogincheckComponent} from "./logincheck/logincheck.component";
 import {InicioComponent} from "./inicio/inicio.component";
-import {RouterModule, Routes} from "@angular/router";
+import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 import {TableComponent} from "./table/table.component";
 import {TablaUsuarioLogComponent} from "./tabla-usuario-log/tabla-usuario-log.component";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
@@ -15,7 +15,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{
+    useHash: false,
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
