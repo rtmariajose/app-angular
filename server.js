@@ -6,17 +6,8 @@ const app = express();
 const port = 3000;
 
 const allowedOrigins = ['http://localhost:4200', 'http://localhost:3000',
-  'http://34.125.28.137:4200','http://34.125.28.137:3000','http://34.125.28.137:80'];
-app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'ERROR viene de otro lado.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
-}));
+'http://34.125.28.137:4200','http://34.125.28.137:3000','http://34.125.28.137:80','34.125.28.137/:1'];
+app.use(cors({ origin: '*' }));
 
 const connection = mysql.createConnection({
   host:'34.145.215.127',
