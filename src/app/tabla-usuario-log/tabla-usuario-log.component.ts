@@ -4,12 +4,15 @@ import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
+import {environment} from "../../environments/environment";
 @Component({
   selector: 'app-tabla-usuario-log',
   templateUrl: './tabla-usuario-log.component.html',
   styleUrls: ['./tabla-usuario-log.component.css']
 })
 export class TablaUsuarioLogComponent {
+  private baseUrl: string = environment.baseUrl;
+
   dataTable: any;
   currentPage: number = 1;
   pageSize: number = 10;
@@ -46,7 +49,7 @@ export class TablaUsuarioLogComponent {
           .set('order[0][dir]', dataTablesParameters.order[0].dir)
           .set('usuario',this.email);
 
-        this.http.get('http://34.176.228.134/log_usuario', { params })
+        this.http.get(this.baseUrl+'/log_usuario', { params })
           .subscribe((response: any) => {
 
             callback({

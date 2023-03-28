@@ -4,12 +4,14 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
+import {environment} from "../../environments/environment";
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
 export class TableComponent{
+  private baseUrl: string = environment.baseUrl;
   dataTable: any;
   currentPage: number = 1;
   pageSize: number = 10;
@@ -40,7 +42,7 @@ export class TableComponent{
           .set('order[0][column]', dataTablesParameters.order[0].column)
           .set('order[0][dir]', dataTablesParameters.order[0].dir);
 
-        this.http.get('http://34.176.228.134/saldos', { params })
+        this.http.get(this.baseUrl+'/saldos', { params })
           .subscribe((response: any) => {
 
             callback({

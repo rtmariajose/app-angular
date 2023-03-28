@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient, HttpParams} from '@angular/common/http';
 import Swal from 'sweetalert2';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-logincheck',
@@ -10,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./logincheck.component.css']
 })
 export class LogincheckComponent implements OnInit{
+  private baseUrl: string = environment.baseUrl;
   myForm!:FormGroup;
   loading = false;
   submitted = false;
@@ -51,7 +53,7 @@ export class LogincheckComponent implements OnInit{
         .set('password',this.myForm.value.password)
 
 
-      this.http.get('http://34.176.228.134/usuario_login', { params })
+      this.http.get(this.baseUrl+'/usuario_login', { params })
         .subscribe((response: any) => {
           this.loading = false;
           const email_u = this.myForm.value.email;
