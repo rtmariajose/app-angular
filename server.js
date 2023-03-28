@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 
 const allowedOrigins = ['http://localhost:4200', 'http://localhost:3000',
-  'http://34.125.28.137:4200','http://34.125.28.137:3000','http://34.125.28.1374'];
+  'http://34.125.28.137:4200','http://34.125.28.137:3000','http://34.125.28.137:80'];
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
