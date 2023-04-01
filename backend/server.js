@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
-const port = 3001;
+const port = 3002;
 
 const allowedOrigins = ['http://localhost:4200', 'http://localhost:3000',
   'http://34.125.28.137:4200','http://34.125.28.137:3000','http://34.125.28.137:80','34.125.28.137/:1'];
